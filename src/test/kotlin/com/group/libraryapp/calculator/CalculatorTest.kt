@@ -22,7 +22,7 @@ class CalculatorTest {
 
         // then
         if (calculator.number != 8) {
-            throw IllegalArgumentException("기대한 테스트 결과와 일치하지 않습니다.")
+            throw IllegalStateException("기대한 테스트 결과와 일치하지 않습니다.")
         }
     }
 
@@ -35,7 +35,7 @@ class CalculatorTest {
 
         // then
         if (calculator.number != 1) {
-            throw IllegalArgumentException("기대한 테스트 결과와 일치하지 않습니다.")
+            throw IllegalStateException("기대한 테스트 결과와 일치하지 않습니다.")
         }
     }
 
@@ -48,7 +48,7 @@ class CalculatorTest {
 
         // then
         if (calculator.number != 30) {
-            throw IllegalArgumentException("기대한 테스트 결과와 일치하지 않습니다.")
+            throw IllegalStateException("기대한 테스트 결과와 일치하지 않습니다.")
         }
     }
 
