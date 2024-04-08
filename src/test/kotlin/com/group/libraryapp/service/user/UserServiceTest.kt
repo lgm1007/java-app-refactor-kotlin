@@ -70,4 +70,16 @@ class UserServiceTest @Autowired constructor(
         assertThat(resultUser.name).isEqualTo("B")
     }
 
+    @Test
+    fun deleteUserTest() {
+        // given
+        userRepository.save(User("A", null))
+
+        // when
+        userService.deleteUser("A")
+
+        // then
+        assertThat(userRepository.findAll()).isEmpty()
+    }
+
 }
