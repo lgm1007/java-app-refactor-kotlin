@@ -4,6 +4,7 @@ import com.group.libraryapp.domain.user.User
 import com.group.libraryapp.domain.user.UserRepository
 import org.assertj.core.api.AssertionsForInterfaceTypes.assertThat
 import com.group.libraryapp.dto.user.request.UserCreateRequest
+import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -13,6 +14,14 @@ class UserServiceTest @Autowired constructor(
     private val userRepository: UserRepository,
     private val userService: UserService
 ) {
+
+    /**
+     * 각각의 유닛테스트가 실행 완료될 때마다 DB 클리어
+     */
+    @AfterEach
+    fun cleanDB() {
+        userRepository.deleteAll()
+    }
 
     @Test
     fun saveUserTest() {
