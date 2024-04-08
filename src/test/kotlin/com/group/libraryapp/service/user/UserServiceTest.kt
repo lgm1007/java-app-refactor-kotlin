@@ -1,5 +1,6 @@
 package com.group.libraryapp.service.user
 
+import com.group.libraryapp.domain.user.User
 import com.group.libraryapp.domain.user.UserRepository
 import org.assertj.core.api.AssertionsForInterfaceTypes.assertThat
 import com.group.libraryapp.dto.user.request.UserCreateRequest
@@ -26,6 +27,23 @@ class UserServiceTest @Autowired constructor(
         assertThat(results).hasSize(1)
         assertThat(results[0].name).isEqualTo("lee")
         assertThat(results[0].age).isNull()
+    }
+
+    @Test
+    fun getUsersTest() {
+        // given
+        userRepository.saveAll(listOf(
+            User("A", 20),
+            User("B", null)
+        ))
+
+        // when
+        val resultUsers = userService.getUsers()
+
+        //then
+        assertThat(resultUsers).hasSize(2)
+        assertThat(resultUsers).extracting("name").containsExactlyInAnyOrder("A", "B")
+        assertThat(resultUsers).extracting("age").containsExactlyInAnyOrder(20, null)
     }
 
 }
