@@ -6,6 +6,7 @@ import org.assertj.core.api.AssertionsForInterfaceTypes.assertThat
 import com.group.libraryapp.dto.user.request.UserCreateRequest
 import com.group.libraryapp.dto.user.request.UserUpdateRequest
 import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -25,6 +26,7 @@ class UserServiceTest @Autowired constructor(
     }
 
     @Test
+    @DisplayName("유저 저장 테스트")
     fun saveUserTest() {
         // given
         val request = UserCreateRequest("lee", null)
@@ -40,6 +42,7 @@ class UserServiceTest @Autowired constructor(
     }
 
     @Test
+    @DisplayName("유저 조회 테스트")
     fun getUsersTest() {
         // given
         userRepository.saveAll(listOf(
@@ -57,6 +60,7 @@ class UserServiceTest @Autowired constructor(
     }
 
     @Test
+    @DisplayName("유저 업데이트 테스트")
     fun updateUserNameTest() {
         // given
         val saveUser = userRepository.save(User("A", null))
@@ -71,6 +75,7 @@ class UserServiceTest @Autowired constructor(
     }
 
     @Test
+    @DisplayName("유저 삭제 테스트")
     fun deleteUserTest() {
         // given
         userRepository.save(User("A", null))
