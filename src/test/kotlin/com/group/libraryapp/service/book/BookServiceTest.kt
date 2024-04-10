@@ -8,6 +8,7 @@ import com.group.libraryapp.domain.user.loanhistory.UserLoanHistory
 import com.group.libraryapp.domain.user.loanhistory.UserLoanHistoryRepository
 import com.group.libraryapp.dto.book.request.BookLoanRequest
 import com.group.libraryapp.dto.book.request.BookRequest
+import com.group.libraryapp.dto.book.request.BookReturnRequest
 import org.assertj.core.api.AssertionsForInterfaceTypes.assertThat
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.DisplayName
@@ -82,6 +83,23 @@ class BookServiceTest @Autowired constructor(
             bookService.loanBook(request)
         }.message
         assertThat(message).isEqualTo("진작 대출되어 있는 책입니다")
+    }
+
+    @Test
+    @DisplayName("책 반납 기능 테스트")
+    fun returnBookTest() {
+        // given
+        val saveUser = userRepository.save(User("lee", null))
+        userLoanHistoryRepository.save(UserLoanHistory(saveUser, "삼국지", false))
+        val request = BookReturnRequest("lee", "삼국지")
+
+        // when
+        bookService.returnBook(request)
+
+        // then
+        val results = userLoanHistoryRepository.findAll()
+        assertThat(results).hasSize(1)
+        assertThat(results[0].isReturn).isTrue
     }
 
 }
