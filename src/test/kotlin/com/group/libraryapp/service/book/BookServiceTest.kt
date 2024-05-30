@@ -1,6 +1,6 @@
 package com.group.libraryapp.service.book
 
-import com.group.libraryapp.domain.book.Book
+import com.group.libraryapp.domain.book.JavaBook
 import com.group.libraryapp.domain.book.BookRepository
 import com.group.libraryapp.domain.user.User
 import com.group.libraryapp.domain.user.UserRepository
@@ -53,7 +53,7 @@ class BookServiceTest @Autowired constructor(
     @DisplayName("책 대출 기능 테스트")
     fun loanBookTest() {
         // given
-        bookRepository.save(Book("삼국지"))
+        bookRepository.save(JavaBook("삼국지"))
         val saveUser = userRepository.save(User("lee", null))
         val request = BookLoanRequest("lee", "삼국지")
 
@@ -72,7 +72,7 @@ class BookServiceTest @Autowired constructor(
     @DisplayName("대출이 이미 된 책 대출 테스트")
     fun loanBookFailTest() {
         // given
-        bookRepository.save(Book("삼국지"))
+        bookRepository.save(JavaBook("삼국지"))
         val saveUser = userRepository.save(User("lee", null))
         // 이미 대출 된 책이므로 대출 기록이 존재
         userLoanHistoryRepository.save(UserLoanHistory(saveUser, "삼국지", false))
