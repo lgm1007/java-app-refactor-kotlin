@@ -75,7 +75,14 @@ class BookServiceTest @Autowired constructor(
         bookRepository.save(Book("삼국지"))
         val saveUser = userRepository.save(User(null, "lee", null))
         // 이미 대출 된 책이므로 대출 기록이 존재
-        userLoanHistoryRepository.save(UserLoanHistory(saveUser, "삼국지", false))
+        userLoanHistoryRepository.save(
+            UserLoanHistory(
+                null,
+                saveUser,
+                "삼국지",
+                false
+            )
+        )
         val request = BookLoanRequest("lee", "삼국지")
 
         // when & then
@@ -90,7 +97,14 @@ class BookServiceTest @Autowired constructor(
     fun returnBookTest() {
         // given
         val saveUser = userRepository.save(User(null, "lee", null))
-        userLoanHistoryRepository.save(UserLoanHistory(saveUser, "삼국지", false))
+        userLoanHistoryRepository.save(
+            UserLoanHistory(
+                null,
+                saveUser,
+                "삼국지",
+                false
+            )
+        )
         val request = BookReturnRequest("lee", "삼국지")
 
         // when

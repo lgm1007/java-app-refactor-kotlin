@@ -2,12 +2,9 @@ package com.group.libraryapp.domain.user
 
 import com.group.libraryapp.domain.book.Book
 import com.group.libraryapp.domain.user.loanhistory.UserLoanHistory
-import javax.persistence.CascadeType
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
-import javax.persistence.OneToMany
+import javax.persistence.*
 
+@Entity
 class User(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,7 +27,14 @@ class User(
     }
 
     fun loanBook(book: Book) {
-        this.userLoanHistories.add(UserLoanHistory(this, book.name, false))
+        this.userLoanHistories.add(
+            UserLoanHistory(
+                null,
+                this,
+                book.name,
+                false
+            )
+        )
     }
 
     fun returnBook(bookName: String) {
