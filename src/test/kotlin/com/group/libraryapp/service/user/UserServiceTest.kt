@@ -1,10 +1,10 @@
 package com.group.libraryapp.service.user
 
-import com.group.libraryapp.domain.user.JavaUser
+import com.group.libraryapp.domain.user.User
 import com.group.libraryapp.domain.user.UserRepository
-import org.assertj.core.api.AssertionsForInterfaceTypes.assertThat
 import com.group.libraryapp.dto.user.request.UserCreateRequest
 import com.group.libraryapp.dto.user.request.UserUpdateRequest
+import org.assertj.core.api.AssertionsForInterfaceTypes.assertThat
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -46,8 +46,8 @@ class UserServiceTest @Autowired constructor(
     fun getUsersTest() {
         // given
         userRepository.saveAll(listOf(
-            JavaUser("A", 20),
-            JavaUser("B", null)
+            User(null, "A", 20),
+            User(null, "B", null)
         ))
 
         // when
@@ -63,8 +63,8 @@ class UserServiceTest @Autowired constructor(
     @DisplayName("유저 업데이트 테스트")
     fun updateUserNameTest() {
         // given
-        val saveUser = userRepository.save(JavaUser("A", null))
-        val request = UserUpdateRequest(saveUser.id, "B")
+        val saveUser = userRepository.save(User(null, "A", null))
+        val request = UserUpdateRequest(saveUser.id ?: 0, "B")
 
         // when
         userService.updateUserName(request)
@@ -78,7 +78,7 @@ class UserServiceTest @Autowired constructor(
     @DisplayName("유저 삭제 테스트")
     fun deleteUserTest() {
         // given
-        userRepository.save(JavaUser("A", null))
+        userRepository.save(User(null, "A", null))
 
         // when
         userService.deleteUser("A")

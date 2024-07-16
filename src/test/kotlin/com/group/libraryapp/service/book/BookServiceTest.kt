@@ -2,7 +2,7 @@ package com.group.libraryapp.service.book
 
 import com.group.libraryapp.domain.book.Book
 import com.group.libraryapp.domain.book.BookRepository
-import com.group.libraryapp.domain.user.JavaUser
+import com.group.libraryapp.domain.user.User
 import com.group.libraryapp.domain.user.UserRepository
 import com.group.libraryapp.domain.user.loanhistory.UserLoanHistory
 import com.group.libraryapp.domain.user.loanhistory.UserLoanHistoryRepository
@@ -54,7 +54,7 @@ class BookServiceTest @Autowired constructor(
     fun loanBookTest() {
         // given
         bookRepository.save(Book("삼국지"))
-        val saveUser = userRepository.save(JavaUser("lee", null))
+        val saveUser = userRepository.save(User(null, "lee", null))
         val request = BookLoanRequest("lee", "삼국지")
 
         // when
@@ -73,7 +73,7 @@ class BookServiceTest @Autowired constructor(
     fun loanBookFailTest() {
         // given
         bookRepository.save(Book("삼국지"))
-        val saveUser = userRepository.save(JavaUser("lee", null))
+        val saveUser = userRepository.save(User(null, "lee", null))
         // 이미 대출 된 책이므로 대출 기록이 존재
         userLoanHistoryRepository.save(UserLoanHistory(saveUser, "삼국지", false))
         val request = BookLoanRequest("lee", "삼국지")
@@ -89,7 +89,7 @@ class BookServiceTest @Autowired constructor(
     @DisplayName("책 반납 기능 테스트")
     fun returnBookTest() {
         // given
-        val saveUser = userRepository.save(JavaUser("lee", null))
+        val saveUser = userRepository.save(User(null, "lee", null))
         userLoanHistoryRepository.save(UserLoanHistory(saveUser, "삼국지", false))
         val request = BookReturnRequest("lee", "삼국지")
 
