@@ -1,7 +1,6 @@
 package com.group.libraryapp.domain.user;
 
 import com.group.libraryapp.domain.book.Book;
-import com.group.libraryapp.domain.book.JavaBook;
 import com.group.libraryapp.domain.user.loanhistory.UserLoanHistory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -13,7 +12,7 @@ import java.util.List;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
-public class User {
+public class JavaUser {
 
   @Id
   @GeneratedValue(strategy = IDENTITY)
@@ -27,11 +26,11 @@ public class User {
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
   private final List<UserLoanHistory> userLoanHistories = new ArrayList<>();
 
-  public User() {
+  public JavaUser() {
 
   }
 
-  public User(String name, Integer age) {
+  public JavaUser(String name, Integer age) {
     if (name.isBlank()) {
       throw new IllegalArgumentException("이름은 비어 있을 수 없습니다");
     }

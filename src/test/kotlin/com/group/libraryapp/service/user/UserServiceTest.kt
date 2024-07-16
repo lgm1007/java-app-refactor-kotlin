@@ -1,6 +1,6 @@
 package com.group.libraryapp.service.user
 
-import com.group.libraryapp.domain.user.User
+import com.group.libraryapp.domain.user.JavaUser
 import com.group.libraryapp.domain.user.UserRepository
 import org.assertj.core.api.AssertionsForInterfaceTypes.assertThat
 import com.group.libraryapp.dto.user.request.UserCreateRequest
@@ -46,8 +46,8 @@ class UserServiceTest @Autowired constructor(
     fun getUsersTest() {
         // given
         userRepository.saveAll(listOf(
-            User("A", 20),
-            User("B", null)
+            JavaUser("A", 20),
+            JavaUser("B", null)
         ))
 
         // when
@@ -63,7 +63,7 @@ class UserServiceTest @Autowired constructor(
     @DisplayName("유저 업데이트 테스트")
     fun updateUserNameTest() {
         // given
-        val saveUser = userRepository.save(User("A", null))
+        val saveUser = userRepository.save(JavaUser("A", null))
         val request = UserUpdateRequest(saveUser.id, "B")
 
         // when
@@ -78,7 +78,7 @@ class UserServiceTest @Autowired constructor(
     @DisplayName("유저 삭제 테스트")
     fun deleteUserTest() {
         // given
-        userRepository.save(User("A", null))
+        userRepository.save(JavaUser("A", null))
 
         // when
         userService.deleteUser("A")
