@@ -7,15 +7,15 @@ import javax.persistence.Id
 
 @Entity
 class Book(
-    val name: String,
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null
+    val name: String
 ) {
     init {
         if (name.isBlank()) {
             throw IllegalArgumentException("이름은 비어 있을 수 없습니다.")
         }
     }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long? = null
 }

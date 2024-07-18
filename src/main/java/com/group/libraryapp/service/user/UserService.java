@@ -23,7 +23,7 @@ public class UserService {
 
   @Transactional
   public void saveUser(UserCreateRequest request) {
-    User newUser = new User(null, request.getName(), request.getAge(), Collections.emptyList());
+    User newUser = new User(request.getName(), request.getAge(), Collections.emptyList());
     userRepository.save(newUser);
   }
 

@@ -6,21 +6,22 @@ import javax.persistence.*
 
 @Entity
 class User(
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null,
-
     var name: String,
     var age: Int?,
 
     @OneToMany(mappedBy = "user", cascade = [CascadeType.ALL], orphanRemoval = true)
     val userLoanHistories: MutableList<UserLoanHistory> = mutableListOf()
 ) {
+
     init {
         if (name.isBlank()) {
             throw IllegalArgumentException("이름은 비어 있을 수 없습니다");
         }
     }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long? = null
 
     fun updateName(name: String) {
         this.name = name
@@ -29,7 +30,6 @@ class User(
     fun loanBook(book: Book) {
         this.userLoanHistories.add(
             UserLoanHistory(
-                null,
                 this,
                 book.name,
                 false
